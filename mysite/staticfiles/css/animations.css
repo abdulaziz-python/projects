@@ -1,0 +1,51 @@
+@keyframes scan-line {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glow {
+    0%, 100% {
+        text-shadow: 0 0 5px var(--secondary-color);
+    }
+    50% {
+        text-shadow: 0 0 20px var(--secondary-color);
+    }
+}
+
+@keyframes cursor-blink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.fade-in {
+    animation: fade-in 0.5s ease forwards;
+}
+
+.glow-text {
+    animation: glow 2s ease-in-out infinite;
+}
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: var(--secondary-color);
+    animation: cursor-blink 1s infinite;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+}

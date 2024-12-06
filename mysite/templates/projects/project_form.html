@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="form-container">
+    <h1 class="project-title">{% if form.instance.pk %}Edit{% else %}Add New{% endif %} Project</h1>
+    
+    <form method="post" enctype="multipart/form-data" class="card">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Save Project</button>
+    </form>
+</div>
+{% endblock %}

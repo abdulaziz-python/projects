@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="projects-container">
+    <h1 class="project-title">My Projects</h1>
+    
+    {% for project in projects %}
+        <div class="card">
+            <h2>{{ project.name }}</h2>
+            <div class="terminal-effect">
+                {{ project.description }}
+            </div>
+            <div class="project-meta">
+                <p class="star-rating">
+                    Average Rating: {{ project.average_rating|floatformat:1 }} / 5
+                    {% with ''|center:project.average_rating|make_list as stars %}
+                        {% for _ in stars %}★{% endfor %}
+                    {% endwith %}
+                </p>
+                <a href="{{ project.link }}" class="btn" target="_blank">View Project</a>
+                <a href="{% url 'project_detail' project.pk %}" class="btn">Details</a>
+            </div>
+        </div>
+    {% empty %}
+        <p>No projects available yet.</p>
+    {% endfor %}
+</div>
+{% endblock %}

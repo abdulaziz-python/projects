@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abdulaziz</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/animations.css">
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/rating.css">
+    <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="{% url 'project_list' %}" class="navbar-brand">
+                <i class="fas fa-terminal"></i> Portfolio
+            </a>
+            <div class="nav-links">
+                <a href="{% url 'project_list' %}" class="btn">
+                    <i class="fas fa-project-diagram"></i> Projects
+                </a>
+                <a href="{% url 'feedback_list' %}" class="btn">
+                    <i class="fas fa-comments"></i> Feedback
+                </a>
+                <a href="https://abdulaziz-coder.vercel.app/" class="btn">
+                    <i class="fas fa-external-link-alt"></i> Main Portfolio Website
+                </a>
+                {% if user.is_authenticated %}
+                    <a href="{% url 'project_create' %}" class="btn">
+                        <i class="fas fa-plus-circle"></i> Add Project
+                    </a>
+                    <a href="{% url 'admin:index' %}" class="btn">
+                        <i class="fas fa-user-shield"></i> Admin
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+
+    <main class="container">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                        <i class="fas fa-info-circle"></i> {{ message }}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://t.me/ablaze_coder" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                    <span>DM me </span>
+                </a>
+                <a href="https://t.me/pythonnews_uzbekistan" target="_blank" class="social-link">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram Channel</span>
+                </a>
+                <a href="https://discord.com/@ablaze_coder" target="_blank" class="social-link">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+            </div>
+            <div class="footer-text">
+                <p><i class="fas fa-code"></i> with <i class="fas fa-heart"></i> by Ablaze Coder</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/animations.js"></script>
+    <script src="/static/js/rating.js"></script>
+</body>
+</html>

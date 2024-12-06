@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="project-detail">
+    <h1 class="project-title">{{ project.name }}</h1>
+    
+    <div class="card">
+        <div class="terminal-effect">
+            {{ project.description }}
+        </div>
+        
+        <div class="project-meta">
+            <div class="rating-container">
+                <h2 class="rating-title">Project Rating</h2>
+                
+                <div class="rating-stats">
+                    <div class="rating-average">
+                        {{ project.average_rating|floatformat:1 }}
+                    </div>
+                    <div class="rating-distribution">
+                        {% for i in "54321"|make_list %}
+                            <div class="rating-bar">
+                                <span class="rating-bar-label">{{ i }}★</span>
+                                <div class="rating-bar-track">
+                                    <div class="rating-bar-fill" data-percentage="{{ project.ratings.all|length }}"></div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    <div class="rating-count">
+                        {{ project.ratings.count }} ratings
+                    </div>
+                </div>
+
+                <form method="post" class="rating-form">
+                    {% csrf_token %}
+                    <div class="star-rating-container">
+                        <div class="star-rating">
+                            {% for i in "12345"|make_list %}
+                                <span class="star" data-rating="{{ i }}">
+                                    <i class="fas fa-star"></i>
+                                </span>
+                            {% endfor %}
+                        </div>
+                        {{ rating_form.stars }}
+                        <button type="submit" class="btn">
+                            <i class="fas fa-star"></i> Submit Rating
+                        </button>
+                    </div>
+                </form>
+            </div>
+            
+            {% if project.project_file %}
+                <a href="{{ project.project_file.url }}" class="btn" download>
+                    <i class="fas fa-download"></i> Download Project Files
+                </a>
+            {% endif %}
+            
+            <a href="{{ project.link }}" class="btn" target="_blank">
+                <i class="fas fa-external-link-alt"></i> View Project
+            </a>
+        </div>
+    </div>
+</div>
+{% endblock %}

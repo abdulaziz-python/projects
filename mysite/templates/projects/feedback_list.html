@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="feedback-container">
+    <h1 class="project-title">Feedback</h1>
+    
+    <a href="{% url 'feedback_create' %}" class="btn">Leave Feedback</a>
+
+    <div class="feedback-list">
+        {% for feedback in feedbacks %}
+            <div class="feedback-card">
+                <h3>{{ feedback.full_name }}</h3>
+                <p class="terminal-effect">{{ feedback.comment }}</p>
+                <small>Posted on: {{ feedback.created_at|date:"F d, Y" }}</small>
+            </div>
+        {% empty %}
+            <p>No feedback available yet.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
